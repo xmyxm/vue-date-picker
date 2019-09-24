@@ -1,6 +1,6 @@
 <template>
-  <div class="login-container">
-    
+  <div class="calendar">
+      我是日历组件
   </div>
 </template>
 
@@ -10,17 +10,7 @@ export default {
   name: 'DatePicker',
   data() {
     return {
-      loginForm: {
-        username: 'admin',
-        password: '111111'
-      },
-      loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
-      },
-      loading: false,
-      passwordType: 'password',
-      redirect: undefined
+      
     }
   },
   watch: {
@@ -28,14 +18,7 @@ export default {
   },
   methods: {
     tap() {
-      if (this.passwordType === 'password') {
-        this.passwordType = ''
-      } else {
-        this.passwordType = 'password'
-      }
-      this.$nextTick(() => {
-        this.$refs.password.focus()
-      })
+      
     }
   }
 }

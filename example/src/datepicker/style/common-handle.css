@@ -1,0 +1,13 @@
+.commonHandle {
+    text-align: center;
+    margin-bottom: 0.1rem;
+}
+.commonHandleokBtn {
+    width: 55%;
+    margin-left: 0.1rem;
+    margin-right: 0;
+}
+.commonHandlecancelBtn {
+    width: 35%;
+}
+
