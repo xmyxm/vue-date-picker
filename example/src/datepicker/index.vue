@@ -2,7 +2,7 @@
   <div :class="size + (sizeLimit ? '' : ' notLimitSize')">
     <div class="inner">
       <!-- 蒙层和日历组件 -->
-      <el-mask v-if="tmpStatus in [MODE.YEAR, MODE.MONTH, MODE.CLOCK]" :on-cancel="handleCancelMaskFun">
+      <el-mask v-if="tmpStatus" :on-cancel="handleCancelMaskFun">
         <Year
           v-if="tmpStatus == MODE.YEAR"
           v-bind="maskSpec"
@@ -85,18 +85,17 @@
       </div>
 
       <!-- 日期单元 -->
-      <Swipe class-Name="dayList" data-role-class="calendar-dayList">
+      <Swipe class-name="dayList" data-role-class="calendar-dayList">
         <Tap
           v-for="dayData in dayListData"
-          @click="handleChooseDay(dayData)"
           :class="dayData.status"
           :init-data="dayData"
-          :key="dayData.lDay"
+          :key="`${dayData.year}${dayData.month}${dayData.val}`"
         >
           <span class="dayItemVal">{{dayData.val}}</span>
           <p class="vicationWrap" :title="dayData.lDay">{{dayData.lDay}}</p>
-          <p v-if="dayData.holiday" class="{styles.holidayWrap}">假</p>
-          <p v-if="dayData.work" class="{styles.workWrap}">班</p>
+          <p v-if="dayData.holiday" class="holidayWrap">假</p>
+          <p v-if="dayData.work" class="workWrap">班</p>
         </Tap>
       </Swipe>
 
@@ -639,7 +638,7 @@ export default {
       let dateVal = tools.parseDate(displayDateNext);
       let _endDate = enableRange ? (endDate || startDate) : startDate;
 
-      return dayConverters(
+      let dayList = dayConverters(
             {
                 month: dateVal.month,
                 year: dateVal.year
@@ -653,6 +652,11 @@ export default {
             enablefix,
             lunar
         );
+        let handleChooseDayFun = this.handleChooseDay.bind(this)
+        dayList.forEach(item => {
+          item.tapClick = function(){handleChooseDayFun(item)}
+        })
+        return dayList
     }
   },
   methods: {

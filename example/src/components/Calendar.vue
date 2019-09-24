@@ -1,12 +1,12 @@
 <template>
   <div class="calendar-box">
-    <header class="header">
+    <header class="com-header">
       <div class="back"></div>
       <div class="title"></div>
       <div class="next"></div>
     </header>
     <div class="headerbox"></div>
-    <date-picker></date-picker>
+    <date-picker :lunar="true"></date-picker>
   </div>
 </template>
 
@@ -27,8 +27,8 @@ export default {
 };
 </script>
 
-<style scoped>
-.header {
+<style>
+.com-header {
   position: fixed;
   top: 0;
   left: 0;
@@ -67,4 +67,9 @@ export default {
 .headerbox {
   height: 44px;
 }
+
+.calendar-box .mask {
+  top: 44px;
+}
+
 </style>

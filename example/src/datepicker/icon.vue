@@ -17,7 +17,6 @@ export default {
 </script>
 
 <style scoped>
-
 .angleDoubleLeft {
     background: url("./style/icon/angleDoubleLeft.png") center no-repeat;
 }
@@ -48,6 +47,16 @@ export default {
     height: 40px;
     background-size: 40px 40px;
 }
+
+.angleDoubleLeft,
+.angleLeft,
+.angleRight,
+.angleDoubleRight {
+    width: 20px;
+    height: 20px;
+    background-size: 10px 10px;
+}
+
 
 </style>
 

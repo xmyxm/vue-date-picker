@@ -1,24 +1,27 @@
 <template>
   <div class="mask">
-        <div class="maskInner">
-            <slot></slot>
-            <div class="maskCancel" @touchend="onCancel">
-                <Icon type="close" />
-            </div>
-        </div>
+    <div class="maskInner">
+      <slot></slot>
+      <div class="maskCancel" @touchend="onCancel">
+        <Icon type="close" />
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-import Icon from './icon';
+import Icon from "./icon";
 
 export default {
-  name: 'Mask',
+  name: "elMask",
+  components: {
+    Icon
+  },
   props: {
-      onCancel: {
-          type: Function,
-          default: function(){}
-      }
+    onCancel: {
+      type: Function,
+      default: function() {}
+    }
   }
 };
 </script>
