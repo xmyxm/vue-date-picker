@@ -195,11 +195,12 @@
 .todayDisabled,
 .todayRegion,
 .todayRegionDisabled {
+    position: relative;
     display: inline-block;
     width: 14%;
     padding: 3px;
     text-align: center;
-    color: #118bfb;
+    /* color: #118bfb; */
     box-sizing: border-box;
 }
 .weekItemWeekend {
@@ -241,9 +242,13 @@
     color: #cccccc;
 }
 
-.todayDisabled .dayItemVal:hover {
+.todayDisabled .dayItemVal {
     background-color: #f8f8f8;
+    color: #ccc;
 }
+.todayDisabled .vicationWrap {
+    color: #ccc;
+} 
 
 .btn,
 .disableLeftBtn,
@@ -317,6 +322,7 @@
 .normalActiveCell {
     color: #fff;
     background-color: #118bfb;
+    font-size: 13px;
 }
 .normalActiveCell:hover {
     background-color: #118bfb;

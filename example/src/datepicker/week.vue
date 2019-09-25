@@ -114,13 +114,14 @@ export default {
             }
             let data = {
                 index,
+                disabled: item.disabled,
                 number: item.number,
                 monday: item.monday,
                 sunday: item.sunday,
-                tapClick: this.handleChooseWeek.bind(this, data),
                 tapClassName: className,
                 content: `${item.mondayStr}${item.sundayStr ? `-${item.sundayStr}` : ""}`
             }
+            data.tapClick = this.handleChooseWeek.bind(this, data)
             return data
         })
         return dataList
@@ -231,7 +232,7 @@ export default {
 
         let target = e.currentTarget;
         let week = parseInt(target.getAttribute('data-week'), 10);
-        let { delayChange } = this.props;
+        let { delayChange, showYear } = this;
         if (this.selectWeek !== week || this.selectYear !== showYear) {
             let monday = target.getAttribute('data-monday');
             let sunday = target.getAttribute('data-sunday');

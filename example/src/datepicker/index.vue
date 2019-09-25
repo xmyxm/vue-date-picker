@@ -70,7 +70,7 @@ export default {
   props: {
     showKeyList: {
       type: Array,
-      default: ['day', 'week', 'month', 'quarter', 'year', 'festival', 'optional']
+      default: function(){ return ['day', 'week', 'month', 'quarter', 'year', 'festival', 'optional']}
     },
     buttonKey: {
       type: String,
@@ -95,7 +95,9 @@ export default {
       lastDateRange: getLastDateRange()
     };
   },
-  created() {},
+  created() {
+
+  },
   watch: {},
   computed: {
     selectKeyList: function() {

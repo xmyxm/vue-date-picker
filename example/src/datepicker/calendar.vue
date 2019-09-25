@@ -535,7 +535,7 @@ export default {
     },
     // 选中的日期，范围模式下表示起始日期
     value: {
-      type: Object
+      type: [Object, Date]
     },
     enablefix: {
       type: Boolean

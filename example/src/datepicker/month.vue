@@ -103,12 +103,14 @@ export default {
                 } else if (disabled) {
                     className = "normalDisabledCell";
                 }
-                list.push({
+                let data = {
                     month: i,
+                    disabled,
                     tapClassName: className,
-                    content: langMap[i],
-                    tapClick: this.handleChooseMonth
-                });
+                    content: langMap[i]
+                }
+                data.tapClick = this.handleChooseMonth.bind(this, data)
+                list.push(data);
             }
             return list
         }
@@ -123,7 +125,8 @@ export default {
     },
     methods: {
         // 选中
-        handleChooseMonth: function(e) {
+        handleChooseMonth: function(data, e) {
+            if (data.disabled) return
             let month = parseInt(e.target.getAttribute('data-month'), 10);
             if (this.selectMonth !== month || this.selectYear !== this.showYear) {
                 this.selectMonth = month;
