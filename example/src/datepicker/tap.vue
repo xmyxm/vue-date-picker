@@ -4,6 +4,7 @@
         :data-monday="initData.monday"
         :data-sunday="initData.sunday"
         :data-month="initData.month"
+        :data-holiday="initData.name"
         :class="initData.tapClassName"
         @touchstart="handleTouchStart"
         @touchmove="handleTouchMove"

@@ -49,15 +49,15 @@ export default {
     },
     props: {
          locale: {
-             type: String,
-             default: conf.locale
+             type: Object,
+             default: function(){ return conf.locale }
          },
         lang: {
             type: String,
             default: 'zh'
         },
         disabled: {
-            type: Boolean,
+            type: [Function, Boolean],
             default: false
         },
         delayChange: {
@@ -73,6 +73,10 @@ export default {
             default: (new Date()).getMonth()
         },
         onChange: {
+            type: Function,
+            default: function(){}
+        },
+        onClose: {
             type: Function,
             default: function(){}
         }
@@ -135,7 +139,7 @@ export default {
             this.showYear = this.showYear + 1
         },
         onCancel:function() {
-            onClose && onClose();
+            this.onClose();
         },
         onSure: function() {
             this.onChange(this.selectMonth + 1, this.selectYear);

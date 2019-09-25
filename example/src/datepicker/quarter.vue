@@ -43,17 +43,10 @@
 
 import Swipe from './swipe';
 import Tap from './tap';
-import CommonHandle from './common-handle';
+import CommonHandle from './commonhandle';
 import Icon from './icon';
 import common from './lib/common';
 import tools from './lib/tools';
-
-const quartList = [
-    { name: '第一季度', day: '1月-3月', key: 1 },
-    { name: '第二季度', day: '4月-6月', key: 2 },
-    { name: '第三季度', day: '7月-9月', key: 3 },
-    { name: '第四季度', day: '10月-12月', key: 4 }
-];
 
 export default {
     name: 'Quarter',
@@ -74,7 +67,7 @@ export default {
             type: Number
         },
         disabled: {
-            type: Boolean,
+            type: [Function, Boolean],
             default: false
         },
         delayChange: {
@@ -94,7 +87,7 @@ export default {
             default: function(){}
         }
   },
-  data: function(){
+  data: function() {
       return {
             showYear: this.year,
             selectYear: this.year,
@@ -107,24 +100,32 @@ export default {
   computed: {
         quartList: function() {
             let disabledCheck = tools.disabledCheckCreator(this.disabled);
-            return quartList.map((item, i) => {
+            const quartListConfig = [
+                { name: '第一季度', day: '1月-3月', key: 1 },
+                { name: '第二季度', day: '4月-6月', key: 2 },
+                { name: '第三季度', day: '7月-9月', key: 3 },
+                { name: '第四季度', day: '10月-12月', key: 4 }
+            ];
+            let listData = quartListConfig.map((item, i) => {
                 let className = "normalCell";
                 let disabled = this.getDisabledValue(this.showYear, item.key, disabledCheck);
                 if (item.key === this.selectQuarter && this.selectYear === this.showYear) {
                     className = "normalActiveCell";
-                } else if (this.disabled) {
+                } else if (disabled) {
                     className = "normalDisabledCell";
                 }
                 let data = {
                     index: i,
                     tapClassName: className,
+                    key: item.key,
                     name: item.name,
                     day: item.day,
-                    disabled: disabled,
-                    tapClick: this.handleChooseHoliday.bind(this, data)
+                    disabled: disabled
                 }
+                data.tapClick = this.handleChooseHoliday.bind(this, data)
                 return data
             })
+            return listData
         }
   },
   watch: {
@@ -187,7 +188,3 @@ export default {
     }
 };
 </script>
-
-<style scoped>
-
-</style>

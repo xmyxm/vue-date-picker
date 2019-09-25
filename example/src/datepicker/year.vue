@@ -1,10 +1,10 @@
 <template>
-  <div :class="(sizeMap[props.size] || 'normal') + (sizeLimit ? '' : ' notLimitSize')">
+  <div :class="(sizeMap[size] || 'normal') + (sizeLimit ? '' : ' notLimitSize')">
     <div class="header">
       <div class="headerInner">
         <div class="btn">
           <div class="iconBtn" @touchend="handlePageRange('prev')">
-            <Icon :type="btnsData.BTN_NORMAL_PREV" />
+            <Icon type="angleLeft" />
           </div>
         </div>
         <div class="centerBtn" @touchend="handleChooseRange">
@@ -14,7 +14,7 @@
         </div>
         <div class="rightBtn" data-type="next" @touchend="handlePageRange('next')">
           <div class="iconBtn">
-            <Icon :type="btnsData.BTN_NORMAL_NEXT" />
+            <Icon type="angleRight" />
           </div>
         </div>
       </div>
@@ -26,7 +26,7 @@
           v-bind:key="item.index || item.start"
           :class="item.className"
           @touchend="item.touchendHandle(item)"
-        ></div>
+        >{{item.start}}</div>
       </div>
     </div>
     <div class="normalFooter">
@@ -44,7 +44,7 @@
 import tools from "./lib/tools";
 import conf from "./lib/config";
 import common from "./lib/common";
-import Icon from "./icon";
+import Icon from './icon';
 import CommonHandle from "./commonhandle";
 
 const BTNS = conf.headBtns;
@@ -54,12 +54,6 @@ const LIST_YEARS = 12;
 const LIST_RANGE_STEP = 10;
 // 大组年数分组步进
 const GROUP_RANGE_STEP = 80;
-
-const sizeMap = {
-  normal: "yearWrapper",
-  medium: "yearWrapperMedium",
-  large: "yearWrapperLarge"
-};
 
 // 12年一组
 const parseYearRange = (year = tools.getYear()) => {
@@ -87,6 +81,10 @@ const parseMoreRange = (year = tools.getYear()) => {
 
 export default {
   name: "Year",
+  components: {
+    Icon,
+    'common-handle': CommonHandle
+  },
   props: {
     year: {
       type: Number
@@ -119,11 +117,17 @@ export default {
       default: function() {}
     },
     disabled: {
-      type: Boolean
+      type: [Function, Boolean],
+      default: false
     }
   },
   data: function(){
       return {
+        sizeMap: {
+          normal: "yearWrapper",
+          medium: "yearWrapperMedium",
+          large: "yearWrapperLarge"
+        },
         locale: conf.locale,
         yearRange: null,
         moreYearGroup: null,
@@ -134,9 +138,6 @@ export default {
         selectYear: tools.getYear(),
         status: "year"
     }
-  },
-  components: {
-    "common-handle": CommonHandle
   },
   computed: {
     langMap: function() {
@@ -170,7 +171,7 @@ export default {
   methods: {
     // 选中当前页
     handleCurrentYear: function() {
-      this.selectYear = getYear();
+      this.selectYear = tools.getYear();
       this.status = "year";
       this.yearRange = parseYearRange(this.selectYear);
       !this.delayChange && this.onChange(this.selectYear);
@@ -246,14 +247,13 @@ export default {
         if (disabled) {
           className = "normalDisabledCell";
         }
-        list.push({
+        let data = {
           start,
           className,
-          disabled,
-          touchendHandle: function(data) {
-            this.handleChooseYear(data);
-          }
-        });
+          disabled
+        }
+        data.touchendHandle = this.handleChooseYear.bind(this, data)
+        list.push(data);
       }
       return list;
     },
@@ -261,17 +261,13 @@ export default {
     // 年份范围
     renderYearRange(rangeGroup, currentRangeStart) {
       let list = rangeGroup.map((range, index) => {
-        return {
+        let data = {
           index,
           start: range.start + " - " + range.end,
-          className:
-            range.start === currentRangeStart
-              ? "twoRowActiveCell"
-              : "twoRowCell",
-          touchendHandle: function() {
-            this.handleChoosedLargeRange(range.start);
-          }
-        };
+          className:  range.start === currentRangeStart  ? "twoRowActiveCell"  : "twoRowCell"
+        }
+        data.touchendHandle = this.handleChoosedLargeRange.bind(this, range.start);
+        return data
       });
       return list;
     }

@@ -506,7 +506,7 @@ export default {
     // 数组时为多点禁用
     // 如：[new Date('2015/11/11'), [new Date('2015/11/01'), new Date('2015/11/04')]]表示禁用 2015/11/11 和 2015/11/01 - 2015/11/04
     disabled: {
-      type: [Boolean, Object],
+      type: [Function, Boolean, Object],
       default: false
     },
     // 日历尺寸，可选normal, medium, large
@@ -652,9 +652,8 @@ export default {
             enablefix,
             lunar
         );
-        let handleChooseDayFun = this.handleChooseDay.bind(this)
         dayList.forEach(item => {
-          item.tapClick = function(){handleChooseDayFun(item)}
+          item.tapClick = this.handleChooseDay.bind(this, item)
         })
         return dayList
     }
@@ -836,7 +835,7 @@ export default {
         targetDate.setHours(this.cache.hour || 0);
         targetDate.setMinutes(this.cache.minute || 0);
 
-        let {enableRange, startDate} = this
+        let {enableRange, startDate, endDate} = this
 
         if (enableRange) {
             // 上一次完整设置后，当次先清除旧设置
@@ -969,6 +968,3 @@ export default {
 };
 </script>
 
-<style>
-@import "./style/index.css";
-</style>

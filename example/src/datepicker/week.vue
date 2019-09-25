@@ -21,7 +21,7 @@
         <Swipe>
             <div class="weeknormalListInner" ref="list">
                 <Tap v-for="item in weekList" :init-data="item" :key="item.index">
-                    <div :ref="item.refs">
+                    <div>
                         <span>W{{item.number}}</span>
                         <p class="weekdateRande">
                             {{item.content}}
@@ -61,8 +61,8 @@ export default {
             default: tools.getDateWeekNum(new Date())
         },
         disabled: {
-            type: Boolean,
-            default: false,
+            type: [Function, Boolean],
+            default: false
         },
         delayChange: {
             type: Boolean,
@@ -102,10 +102,8 @@ export default {
         let weekListDate = this.gerWeekList(startDate, endData, disabledCheck);
         let dataList = weekListDate.map((item, index) => {
             let className = "normalCell";
-            let refs = '';
             if (index === (this.selectWeek - 1) && this.selectYear === this.showYear) {
                 className = "normalActiveCell";
-                refs = 'active';
                 // 默认值
                 if (!this.value.monday) {
                     this.value.monday = item.monday;
@@ -121,8 +119,7 @@ export default {
                 sunday: item.sunday,
                 tapClick: this.handleChooseWeek.bind(this, data),
                 tapClassName: className,
-                refs,
-                content: item.mondayStr + item.sundayStr ? `-${item.sundayStr}` : ""
+                content: `${item.mondayStr}${item.sundayStr ? `-${item.sundayStr}` : ""}`
             }
             return data
         })
@@ -139,9 +136,9 @@ export default {
   },
   mounted: function() {
       // 当前组件渲染完立即调用，服务端不会执行
-    let activeItem = this.$refs.active;
     let parent = this.$refs.list;
     let parentPosition = parent && parent.getBoundingClientRect();
+    let activeItem = this.$refs.list.querySelector('.normalActiveCell')
     let activeItemPosition = activeItem && activeItem.getBoundingClientRect();
     let parentScroll = parent.scrollTop;
     if (activeItemPosition.y > (parentPosition.y + parentPosition.height)) {

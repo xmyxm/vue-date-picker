@@ -23,11 +23,10 @@
         <Swipe class="normalList">
             <div class="holidaynormalListInner">
                 <Tap v-for="item in holidayList" :key="item.name"
-                    @click="handleChooseHoliday(item)"
-                    data-holiday={item.name}
-                    class="item.className">
+                    :init-data="item"
+                    :class="item.className">
                     <div class="holidayItemWrap">
-                        <div class="item.holidayClassName">
+                        <div :class="item.holidayClassName">
                             {{item.name}}
                         </div>
                         <div class="cellDate">
@@ -44,8 +43,11 @@
 
 <script>
 import Icon from './icon';
+import Swipe from './swipe';
+import Tap from './tap';
 import CommonHandle from "./commonhandle";
 import lunarUtil from "./lib/lunar-util";
+import tools from './lib/tools';
 
 const holiday = lunarUtil.getHolidayTypeList();
 // 支持外部传入显示的节日，可按照节日配置表分类，暂时未做
@@ -54,11 +56,14 @@ const holidayListConfig = ['元旦', '春节', '清明', '劳动节', '端午', 
 export default {
   name: 'Holiday',
   components: {
+    Icon,
+    Swipe,
+    Tap,
     'common-handle': CommonHandle
   },
   props: {
     disabled: {
-        type: Boolean,
+        type: [Function, Boolean],
         default: false
     },
     year: {
@@ -100,6 +105,7 @@ export default {
                 className = "normalDisabledCell";
             }
             data.className = className
+            data.tapClick = this.handleChooseHoliday.bind(this, data)
             list.push(data);
         });
         return list
