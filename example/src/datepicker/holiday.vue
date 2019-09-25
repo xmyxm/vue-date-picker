@@ -86,7 +86,7 @@ export default {
   },
   computed: {
       holidayList: function() {
-        let { showYear, disabledCheck, disabled, titleNext, selectYear } = this
+        let { showYear, disabled, titleNext, selectYear } = this
         let disabledCheck = tools.disabledCheckCreator(disabled);
         let list = [];
         // 传入年份，获取节日开始日期和结束日期

@@ -662,3 +662,43 @@
     position: relative;
     z-index: 15;
 }
+
+
+
+
+
+.selectButtons {
+    padding: .3rem .2rem 0 .2rem;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    position: relative;
+    z-index: 15;
+    background-color: #fff;
+}
+
+.buttonItemWrapper {
+    min-width: 25%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.buttonItemWrapper .buttonItem {
+    font-size: 12px;
+    line-height: 20px;
+    color: #118BFB;
+    text-align: center;
+    background-color: #FFFFFF;
+    padding: 0 13px;
+    height: 30px;
+    line-height:30px;
+    position: relative;
+    border-radius: 10px;
+}
+
+.buttonItemWrapper .buttonActive {
+    border-color: #458ef0;
+    background-color: #EEF7FF;
+}
