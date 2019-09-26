@@ -1,17 +1,18 @@
 <template>
   <div class="calendar-box">
-    <header class="com-header">
-      <div class="back"></div>
-      <div class="title"></div>
-      <div class="next"></div>
-    </header>
-    <div class="headerbox"></div>
-    <date-picker :lunar="true"></date-picker>
+    <div class="headerbox">
+      <header class="pageheader">
+        <div class="back"></div>
+        <div class="title"></div>
+        <div class="next"></div>
+      </header>
+    </div>
+    <div @click="onOff" class="datetext">{{dateText}}<i :class="isOpen ? 'open top' : 'open'"></i> </div>
+    <date-picker :open="true" :on-sus="onSus"></date-picker>
   </div>
 </template>
 
 <script>
-// import DatePicker from "../../../src/index.vue"
 import DatePicker from '../datepicker/index';
 
 export default {
@@ -22,13 +23,31 @@ export default {
   data() {
     return {
       title: '日历组件',
+      dateText: this.getDate(),
+      isOpen: false
     };
   },
+  methods: {
+      getDate() {
+            const date = new Date();
+            const year = date.getFullYear();
+            const month = date.getMonth();
+            const day = date.getDay();
+            return `${year}-${month}-${day}`
+      },
+      onOff() {
+          this.isOpen = !this.isOpen
+      },
+      onSus(data, msg) {
+        debugger
+        console.log(msg, data)
+      }
+  }
 };
 </script>
 
 <style>
-.com-header {
+.pageheader {
   position: fixed;
   top: 0;
   left: 0;
@@ -70,6 +89,24 @@ export default {
 
 .calendar-box .mask {
   top: 44px;
+}
+
+.open {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border: none;
+  border-top: 4px solid #117AF4;
+  border-left: 2px solid #fff;
+  border-right: 2px solid #fff;
+  vertical-align: middle;
+  margin-left: 3px;
+  transform-origin:center center; 
+  transition: transform 0.5s ease;
+}
+
+.open.top{
+  transform: rotate(180deg);
 }
 
 </style>
