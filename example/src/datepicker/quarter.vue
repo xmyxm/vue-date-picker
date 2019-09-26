@@ -20,22 +20,22 @@
             </div>
         </div>
         <!-- 季度列表 -->
-        <Swipe>
-                <div class="holidaynormalListInner">
-                    <Tap :key="item.index" v-for="item in quartList" :init-data="item" class="item.tapClassName">
-                        <div key={i} class="itemWrap">
-                            <div class="textName">
-                                {{item.name}}
-                            </div>
-                            <div class="cellDate">
-                                {{item.day}}
-                            </div>
+        <Swipe className="normalList">
+            <div class="holidaynormalListInner">
+                <Tap :key="item.index" v-for="item in quartList" :init-data="item" class="item.tapClassName">
+                    <div key={i} class="itemWrap">
+                        <div class="textName">
+                            {{item.name}}
                         </div>
-                    </Tap>
-                </div>
-            </Swipe>
+                        <div class="cellDate">
+                            {{item.day}}
+                        </div>
+                    </div>
+                </Tap>
+            </div>
+        </Swipe>
             
-            <common-handle v-if="delayChange"/> 
+        <common-handle v-if="delayChange"/> 
     </div>
 </template>
 

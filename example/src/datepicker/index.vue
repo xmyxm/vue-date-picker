@@ -1,5 +1,5 @@
 <template>
-  <div v-if="open">
+  <el-mask v-if="openNext" :top="topNext" >
     <div v-if="selectKeyList" class="selectButtons">
         <div
         v-for="item in selectKeyList"
@@ -19,7 +19,7 @@
     <Quarter v-if="buttonKeyNext == 'quarter'" v-bind="quarterConfig"  :disabled="disabledWeek"></Quarter>
     <Year v-if="buttonKeyNext == 'year'" v-bind="yearConfig" :disabled="disabledYear"></Year>
     <Holiday v-if="buttonKeyNext == 'festival'" v-bind="festivalConfig" :disabled="disabledWeek"></Holiday>
-  </div>
+  </el-mask>
 </template>
 
 <script>
@@ -52,6 +52,10 @@ export default {
     "el-mask": Mask,
   },
   props: {
+    top: {
+      type: Number,
+      default: 0
+    },
     open: {
       type: Boolean,
       default: false
@@ -151,13 +155,31 @@ export default {
   },
   data: function() {
     return {
+      openNext: this.open,
+      topNext: this.top,
       buttonKeyNext: this.buttonKey
     };
   },
   created() {
 
   },
-  watch: {},
+  watch: {
+    open(newOpen) {
+        this.openNext = newOpen
+        this.$nextTick(function() {
+            if (this.openNext) {
+                window.addEventListener('touchmove', this.preventEvent, {
+                  passive: false,
+                });
+            } else {
+                window.removeEventListener('touchmove', this.preventEvent);
+            }
+        });
+    },
+    top(newTop) {
+      this.topNext = newTop
+    }
+  },
   computed: {
     selectKeyList: function() {
       if (this.showKeyList) {
@@ -185,6 +207,10 @@ export default {
     }
   },
   methods: {
+    preventEvent: function(e) {
+       e.preventDefault();
+    },
+
     buttonEventClick: function(item) {
       if (item.key !== this.buttonKeyNext) {
         this.buttonKeyNext = item.key;

@@ -7,8 +7,8 @@
         <div class="next"></div>
       </header>
     </div>
-    <div @click="onOff" class="datetext">{{dateText}}<i :class="isOpen ? 'open top' : 'open'"></i> </div>
-    <date-picker :open="true" :on-sus="onSus"></date-picker>
+    <div @click="onOff" ref="timebox" class="datetext">{{dateText}}<i :class="isOpen ? 'open top' : 'open'"></i> </div>
+    <date-picker :open="isOpen" :top="top" :on-sus="onSus"></date-picker>
   </div>
 </template>
 
@@ -24,7 +24,8 @@ export default {
     return {
       title: '日历组件',
       dateText: this.getDate(),
-      isOpen: false
+      isOpen: false,
+      top: 0
     };
   },
   methods: {
@@ -37,10 +38,15 @@ export default {
       },
       onOff() {
           this.isOpen = !this.isOpen
+          if (this.isOpen) {
+              const timebox = this.$refs.timebox
+              const timeboxPosition = timebox.getBoundingClientRect()
+              const height = timeboxPosition.y + timeboxPosition.height
+              this.top = height
+          }
       },
-      onSus(data, msg) {
-        debugger
-        console.log(msg, data)
+      onSus(data) {
+        console.log(data.key, data)
       }
   }
 };

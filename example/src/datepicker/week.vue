@@ -18,7 +18,7 @@
                 </div>
             </div>
 
-        <Swipe>
+        <Swipe className="normalList">
             <div class="weeknormalListInner" ref="list">
                 <Tap v-for="item in weekList" :init-data="item" :key="item.index">
                     <div>
