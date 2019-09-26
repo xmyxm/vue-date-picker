@@ -215,6 +215,7 @@ export default {
   data: function(){
    return {
       tools,
+      valueNext: this.value,
       displayDateNext: this.displayDate,
       date: null,
       MODE: {
@@ -258,7 +259,14 @@ export default {
     });
   },
   watch: {
-
+      value: function(newValue) {
+        this.valueNext = newValue
+        let injectStatus = this.getInjectStatus();
+        this.validCache = this.injectStatus = injectStatus;
+        let parsedClock = tools.parseDate(this.startDate);
+        this.cache.hour = parsedClock.hour;
+        this.cache.minute = parsedClock.minute;
+      }
   },
   computed: {
     btnsNext: function() {
@@ -279,7 +287,7 @@ export default {
       }
     },
     dayListData: function() {
-      let {displayDateNext, enableRange, endDate, startDate, disabled, validCache, cache, enablefix, lunar} = this
+      let {displayDateNext, enableRange, startDate, endDate, disabled, validCache, cache, enablefix, lunar} = this
       let dateVal = tools.parseDate(displayDateNext);
       let _endDate = enableRange ? (endDate || startDate) : startDate;
 
@@ -360,15 +368,16 @@ export default {
     },
     getInjectStatus: function() {
       let injectStatus = false;
-      let { enableRange, value, startDate, endDate, displayDateNext } = this;
+      let { enableRange, valueNext, startDate, endDate, displayDateNext } = this;
       if (enableRange) {
-        if (value) {
-          if (value.startDate && value.endDate) {
+        if (valueNext) {
+          debugger
+          if (valueNext.startDate && valueNext.endDate) {
             let resolvedStartDate = this.parseDateUnit(
-              value.startDate,
+              valueNext.startDate,
               startDate
             );
-            let resolvedEndDate = this.parseDateUnit(value.endDate, endDate);
+            let resolvedEndDate = this.parseDateUnit(valueNext.endDate, endDate);
             this.startDate = resolvedStartDate.date;
             this.endDate = resolvedEndDate.date;
             if (this.startDate > this.endDate) {
@@ -376,24 +385,24 @@ export default {
               this.startDate = resolvedEndDate.date;
             }
             injectStatus = resolvedStartDate.status && resolvedEndDate.status;
-          } else if (value.startDate) {
+          } else if (valueNext.startDate) {
             let resolvedStartDate = this.parseDateUnit(
-              value.startDate,
+              valueNext.startDate,
               startDate
             );
             this.startDate = resolvedStartDate.date;
             this.endDate = null;
             injectStatus = resolvedStartDate.status;
           }
-        } else if (value === false) {
+        } else if (valueNext === false) {
           this.startDate = null;
           this.endDate = null;
         }
       } else {
-        if (value === false) {
+        if (valueNext === false) {
           this.startDate = null;
         } else {
-          let resolvedStartDate = this.parseDateUnit(value, startDate);
+          let resolvedStartDate = this.parseDateUnit(valueNext, startDate);
           this.startDate = resolvedStartDate.date;
           injectStatus = resolvedStartDate.status;
         }
