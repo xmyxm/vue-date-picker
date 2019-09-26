@@ -32,7 +32,6 @@
 
 <script>
 import Icon from './icon';
-import common from './lib/common';
 import tools from './lib/tools';
 import conf from './lib/config';
 import Swipe from './swipe';

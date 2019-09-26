@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import common from "./lib/common";
 import tools from "./lib/tools";
 
 const DEFAULT_TIME = { hour: 0, minute: 0 };

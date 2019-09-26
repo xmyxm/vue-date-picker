@@ -7,13 +7,10 @@
 </template>
 
 <script>
-import Icon from "./icon";
 
 export default {
   name: "elMask",
-  components: {
-    Icon
-  },
+  components: {},
   props: {
     top: {
       type: Number,

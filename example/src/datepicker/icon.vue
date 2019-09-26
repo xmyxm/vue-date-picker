@@ -3,7 +3,6 @@
 </template>
 
 <script>
-import common from './lib/common';
 
 export default {
   name: 'Icon',

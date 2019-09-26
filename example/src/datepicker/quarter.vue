@@ -45,7 +45,6 @@ import Swipe from './swipe';
 import Tap from './tap';
 import CommonHandle from './commonhandle';
 import Icon from './icon';
-import common from './lib/common';
 import tools from './lib/tools';
 
 export default {

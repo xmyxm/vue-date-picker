@@ -43,7 +43,6 @@
  */
 import tools from "./lib/tools";
 import conf from "./lib/config";
-import common from "./lib/common";
 import Icon from './icon';
 import CommonHandle from "./commonhandle";
 

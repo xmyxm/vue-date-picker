@@ -45,7 +45,7 @@ const handleMonthChange = (month, year) => {
   return item;
 };
 
-const handleRangeChange = (dateGroup, formatString) => {
+const handleRangeChange = (dateGroup) => {
   // 选中单独一天无效
   if (dateGroup.startDate - dateGroup.endDate === 0) {
     return false;
