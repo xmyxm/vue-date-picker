@@ -1,5 +1,5 @@
 <template>
-  <div :class="(sizeMap[size] || 'normal') + (sizeLimit ? '' : ' notLimitSize')">
+  <div :class="'normal' + (sizeLimit ? '' : ' notLimitSize')">
     <div class="header">
       <div class="headerInner">
         <div class="btn">
@@ -123,11 +123,6 @@ export default {
   },
   data: function(){
       return {
-        sizeMap: {
-          normal: "yearWrapper",
-          medium: "yearWrapperMedium",
-          large: "yearWrapperLarge"
-        },
         locale: conf.locale,
         yearRange: null,
         moreYearGroup: null,
@@ -270,4 +265,3 @@ export default {
   }
 };
 </script>
-

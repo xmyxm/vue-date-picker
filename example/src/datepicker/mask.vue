@@ -45,5 +45,6 @@ export default {
 }
 .mask .maskInner {
     position: relative;
+    background: #fff;
 }
 </style>

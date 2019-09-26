@@ -370,8 +370,7 @@ export default {
       let injectStatus = false;
       let { enableRange, valueNext, startDate, endDate, displayDateNext } = this;
       if (enableRange) {
-        if (valueNext) {
-          debugger
+        if (valueNext) {          
           if (valueNext.startDate && valueNext.endDate) {
             let resolvedStartDate = this.parseDateUnit(
               valueNext.startDate,

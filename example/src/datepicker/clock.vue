@@ -30,7 +30,6 @@ const DEFAULT_TIME = { hour: 0, minute: 0 };
 
 const sizeMap = {
   normal: "clockWrapper",
-  medium: "clockWrapperMedium",
   large: "clockWrapperLarge"
 };
 

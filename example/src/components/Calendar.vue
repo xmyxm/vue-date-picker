@@ -46,6 +46,8 @@ export default {
           }
       },
       onSus(data) {
+        this.isOpen = false
+        this.dateText = data.fetchDate
         console.log(data.key, data)
       }
   }

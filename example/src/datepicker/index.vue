@@ -99,7 +99,7 @@ export default {
         let onSus = this.onSus
         return {
           ...lastYearMonth(),
-          onChange: function(data){ onSus(changecall.handleMonthChange(data)) }
+          onChange: function(month, year){ onSus(changecall.handleMonthChange(month, year)) }
         }
       }
     },
@@ -111,7 +111,7 @@ export default {
           ...lastQuarter(),
           enableRange: true,
           lunar: true,
-          onChange: function(data){ onSus(changecall.handleQuarterChange(data)) }
+          onChange: function(quarter, year){ onSus(changecall.handleQuarterChange(quarter, year)) }
         }
       }
     },
@@ -136,7 +136,7 @@ export default {
           lunar: true,
           year: tools.getYear(),
           title: '',
-          onChange: function(data){ onSus(changecall.handleFestivalChange(data)) }
+          onChange: function(data, year){ onSus(changecall.handleFestivalChange(data, year)) }
         }
       }
     },
