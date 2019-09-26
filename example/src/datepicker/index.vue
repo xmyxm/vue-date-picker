@@ -60,6 +60,7 @@ const handleDateChange = (value) => {
         navName: tools.dateFormat('m-d', value),
         fetchDate: tools.dateFormat('Y-m-d', value)
     };
+    console.log('打印day', item)
 };
 
 const handleWeekChange = (value) => {
@@ -72,6 +73,7 @@ const handleWeekChange = (value) => {
         navName: `W${value.week}`,
         fetchDate: `${monday}~${sunday}`
     };
+    console.log('打印week', item)
 };
 
 const handleMonthChange = (month, year) => {
@@ -82,6 +84,7 @@ const handleMonthChange = (month, year) => {
         navName: `${year}-${newMonth}`,
         fetchDate: `${year}-${newMonth}`
     };
+    console.log('打印month', item)
 };
 
 const handleRangeChange = (dateGroup, formatString) => {
@@ -95,6 +98,7 @@ const handleRangeChange = (dateGroup, formatString) => {
         navName: `${tools.dateFormat('m-d', dateGroup.startDate)}~${tools.dateFormat('m-d', dateGroup.endDate)}`,
         fetchDate: `${tools.dateFormat('Y-m-d', dateGroup.startDate)}~${tools.dateFormat('Y-m-d', dateGroup.endDate)}`
     };
+    console.log('打印range', item)
 };
 
 const handleQuarterChange = (quarter, year) => {
@@ -103,20 +107,22 @@ const handleQuarterChange = (quarter, year) => {
         return;
     }
     let item = {
-        name: '',
+        name: '按季',
         key: 'quarter',
         navName: `第${quarter}季度`,
         fetchDate: `${year}-${quarter}`
     };
+    console.log('打印quarter', item)
 };
 
 const handleYearChange = (y) => {
     let item = {
-        name: '',
+        name: '按年',
         key: 'year',
         navName: `按年 ${y}年`,
         fetchDate: y
     };
+    console.log('打印Year', item)
 };
 
 const handleFestivalChange = (param, year) => {
@@ -125,11 +131,12 @@ const handleFestivalChange = (param, year) => {
         return item.name.indexOf(param.name) !== -1;
     });
     let item = {
-        name: '',
+        name: '按节日',
         key: 'festival',
         navName: `${param.name}`,
         fetchDate: `${year}-${data[0].query}`
     };
+    console.log('打印Festival', item)
 };
 
 export default {
@@ -170,8 +177,12 @@ export default {
     },
     monthConfig: {
       type: Object,
-      onChange: handleMonthChange,
-      default: lastYearMonth
+      default: function() {
+        return {
+          ...lastYearMonth(),
+          onChange: handleMonthChange
+        }
+      }
     },
     quarterConfig: {
       type: Object,

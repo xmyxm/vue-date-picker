@@ -2,7 +2,7 @@
   <div :class="size + (sizeLimit ? '' : ' notLimitSize')">
     <div class="inner">
       <!-- 蒙层和日历组件 -->
-      <el-mask v-if="tmpStatus" :on-cancel="handleCancelMaskFun">
+      <!-- <el-mask v-if="tmpStatus" :on-cancel="handleCancelMaskFun">
         <Year
           v-if="tmpStatus == MODE.YEAR"
           v-bind="maskSpec"
@@ -22,7 +22,7 @@
           :on-change="handleClockChangedFun"
           :disable-clock="handleDisableClockFun"
         ></Clock>
-      </el-mask>
+      </el-mask> -->
 
       <!-- 日历头 -->
       <div class="header" data-role-class="calendar-header">

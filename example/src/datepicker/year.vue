@@ -169,12 +169,11 @@ export default {
     }
   },
   methods: {
-    // 选中当前页
+    // 选中当前年
     handleCurrentYear: function() {
       this.selectYear = tools.getYear();
       this.status = "year";
       this.yearRange = parseYearRange(this.selectYear);
-      !this.delayChange && this.onChange(this.selectYear);
     },
 
     // 选中
@@ -183,9 +182,6 @@ export default {
       let year = data.start;
       if (this.selectYear !== year) {
         this.selectYear = year;
-        this.delayChange && this.onChange(this.selectYear);
-      } else {
-        !this.delayChange && this.onChange(this.selectYear);
       }
     },
 

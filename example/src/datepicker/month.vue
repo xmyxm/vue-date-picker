@@ -131,7 +131,6 @@ export default {
             if (this.selectMonth !== month || this.selectYear !== this.showYear) {
                 this.selectMonth = month;
                 this.selectYear = this.showYear;
-                this.onChange(this.selectMonth + 1, this.selectYear);
             }
         },
         // 改变年

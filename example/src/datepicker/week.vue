@@ -243,7 +243,6 @@ export default {
                 monday,
                 sunday
             };
-            this.onChange(this.value);
         }
     },
     // 改变年
