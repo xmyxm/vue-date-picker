@@ -3,7 +3,7 @@
     <div v-if="selectKeyList" class="selectButtons">
         <div
         v-for="item in selectKeyList"
-        class="buttonItemWrapper"
+        :class="item.boxClassName"
         :key="item.key"
         @click="buttonEventClick(item)"
         >
@@ -184,25 +184,34 @@ export default {
     selectKeyList: function() {
       if (this.showKeyList) {
         let keyList = [
-        { name: "按日", key: "day", navName: false },
-        { name: "按周", key: "week", navName: false },
-        { name: "按月", key: "month", navName: false },
-        { name: "季度", key: "quarter", navName: false },
-        { name: "按年", key: "year", navName: false },
-        { name: "节假日", key: "festival", navName: false },
-        { name: "自定义", key: "optional", navName: false }
-      ];
-      let showKey = keyList.filter(item => {
-        if (this.showKeyList.indexOf(item.key) > -1) {
-          if (item.key == this.buttonKeyNext) {
-            item.buttonClassName = "buttonItem buttonActive";
-          } else {
-            item.buttonClassName = "buttonItem";
+          { name: "按日", key: "day", navName: false },
+          { name: "按周", key: "week", navName: false },
+          { name: "按月", key: "month", navName: false },
+          { name: "季度", key: "quarter", navName: false },
+          { name: "按年", key: "year", navName: false },
+          { name: "节假日", key: "festival", navName: false },
+          { name: "自定义", key: "optional", navName: false }
+        ];
+        let boxClassName = 'buttonItemWrapper4'
+        if (this.showKeyList.length < 4) {
+          switch(this.showKeyList.length) {
+            case 3: boxClassName="buttonItemWrapper3"; break;
+            case 2: boxClassName="buttonItemWrapper2"; break;
+            case 1: boxClassName="buttonItemWrapper1"; break;
           }
-          return item
         }
-      });
-      return keyList;
+        let showList = keyList.filter(item => {
+          if (this.showKeyList.indexOf(item.key) > -1) {
+            if (item.key == this.buttonKeyNext) {
+              item.buttonClassName = "buttonItem buttonActive";
+            } else {
+              item.buttonClassName = "buttonItem";
+            }
+            item.boxClassName = boxClassName
+            return item
+          }
+        });
+        return showList;
       }
     }
   },

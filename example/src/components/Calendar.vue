@@ -8,12 +8,13 @@
       </header>
     </div>
     <div @click="onOff" ref="timebox" class="datetext">{{dateText}}<i :class="isOpen ? 'open top' : 'open'"></i> </div>
-    <date-picker :open="isOpen" :top="top" :on-sus="onSus"></date-picker>
+    <date-picker :open="isOpen" :show-key-list="keyList" :top="top" :on-sus="onSus"></date-picker>
   </div>
 </template>
 
 <script>
-import DatePicker from '../datepicker/index';
+// import DatePicker from '../datepicker/index';
+import DatePicker from "@dp/date-picker"
 
 export default {
   name: 'calendar',
@@ -24,6 +25,7 @@ export default {
     return {
       title: '日历组件',
       dateText: this.getDate(),
+      keyList: ['day', 'month'], // 
       isOpen: false,
       top: 0
     };
