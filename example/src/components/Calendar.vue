@@ -13,8 +13,8 @@
 </template>
 
 <script>
-// import DatePicker from '../datepicker/index';
-import DatePicker from "@dp/date-picker"
+import DatePicker from '../datepicker/index';
+// import DatePicker from "@dp/date-picker"
 
 export default {
   name: 'calendar',

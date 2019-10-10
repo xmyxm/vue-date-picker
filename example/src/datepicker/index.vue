@@ -1,5 +1,5 @@
 <template>
-  <el-mask v-if="openNext" :top="topNext" >
+  <el-mask v-if="openNext" :top="topNext" :on-cancel="onClose" >
     <div v-if="selectKeyList" class="selectButtons">
         <div
         v-for="item in selectKeyList"
@@ -37,7 +37,6 @@ import Quarter from "./quarter";
 import Holiday from "./holiday"
 import Calendar from "./calendar";
 
-
 export default {
   name: "DatePicker",
   components: {
@@ -68,6 +67,10 @@ export default {
       type: String,
       default: "day"
     },
+    onClose: {
+      type: Function,
+      default: function(){}
+    },
     onSus: {
       type: Function,
       default: function(){}
@@ -75,8 +78,9 @@ export default {
     dayConfig: {
       type: Object,
       default: function(){
-        let onSus = this.onSus
+        let { onSus , onClose } = this
         return {
+          onClose,
           lunar : true,
           value: lastDate(),
           onChange: function(data){ onSus(changecall.handleDateChange(data)) }
@@ -86,8 +90,9 @@ export default {
     weekConfig: {
       type: Object,
       default: function() {
-        let onSus = this.onSus
+       let { onSus , onClose } = this
         return {
+          onClose,
           ...lastWeek(),
           onChange: function(data){ onSus(changecall.handleWeekChange(data)) }
         }
@@ -96,8 +101,9 @@ export default {
     monthConfig: {
       type: Object,
       default: function() {
-        let onSus = this.onSus
+        let { onSus , onClose } = this
         return {
+          onClose,
           ...lastYearMonth(),
           onChange: function(month, year){ onSus(changecall.handleMonthChange(month, year)) }
         }
@@ -106,8 +112,9 @@ export default {
     quarterConfig: {
       type: Object,
       default: function(){
-        let onSus = this.onSus
+        let { onSus , onClose } = this
         return {
+          onClose,
           ...lastQuarter(),
           enableRange: true,
           lunar: true,
@@ -118,8 +125,9 @@ export default {
     yearConfig: {
       type: Object,
       default: function(){
-        let onSus = this.onSus
+        let { onSus , onClose } = this
         return {
+          onClose,
           enableRange: true,
           lunar: true,
           year: tools.getYear(),
@@ -130,8 +138,9 @@ export default {
     festivalConfig: {
       type: Object,
       default: function(){
-        let onSus = this.onSus
+        let { onSus , onClose } = this
         return {
+          onClose,
           enableRange: true,
           lunar: true,
           year: tools.getYear(),
@@ -143,8 +152,9 @@ export default {
     optionalConfig: {
       type: Object,
       default: function(){
-        let onSus = this.onSus
+        let { onSus , onClose } = this
         return {
+          onClose,
           enableRange: true,
           lunar: true,
           value: lastDateRange(),

@@ -74,6 +74,10 @@ export default {
         type: Boolean,
         default: true
     },
+    onClose: {
+        type: Function,
+        default: function(){}
+    },
     onChange: {
         type: Function,
         default: function(){}

@@ -1,5 +1,5 @@
 <template>
-  <div class="mask" v-bind:style="{top: topHeight + 'px'}" >
+  <div class="mask" v-bind:style="{top: topHeight + 'px'}" @click="close($event)" >
     <div class="maskInner">
       <slot></slot>
     </div>
@@ -26,6 +26,14 @@ export default {
        return this.top
      }
   },
+  methods: {
+    close: function(event) {
+      debugger
+      if (event.target && event.target.className == "mask") {
+        this.onCancel()
+      }
+    }
+  }
 };
 </script>
 
