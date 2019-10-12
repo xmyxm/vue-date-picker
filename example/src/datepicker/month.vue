@@ -47,7 +47,7 @@ export default {
         Tap
     },
     props: {
-         locale: {
+        locale: {
              type: Object,
              default: function(){ return conf.locale }
          },
@@ -120,7 +120,6 @@ export default {
             this.selectYear = newYear
         },
         month(newMonth) {
-            debugger
             this.selectMonth = newMonth
         }
     },

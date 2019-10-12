@@ -21,7 +21,7 @@ export const lastYearMonth = (date = new Date(), offset) => {
     date = new Date(date);
   }
   const year = naturalCalc(`-${offset}month`, date).getFullYear();
-  const month = naturalCalc(`-${offset}month`, date).getMonth();
+  const month = naturalCalc(`-${offset}month`, date).getMonth() + 1;
   return { year, month };
 };
 
@@ -41,8 +41,7 @@ export const lastDateRange = () => {
 
 export const lastQuarter = () => {
   const date = new Date();
-  const year = date.getFullYear();
   const month = date.getMonth();
   const quarter = month > 8 ? 4 : month > 5 ? 3 : month > 2 ? 2 : 1;
-  return { year, quarter };
+  return quarter;
 };

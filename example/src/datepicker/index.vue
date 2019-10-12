@@ -25,7 +25,7 @@
 <script>
 import naturalCalc from './lib/natural-date-calc';
 import changecall from "./lib/changecall";
-import {lastWeek, lastYearMonth, lastDate, lastDateRange, lastQuarter} from "./lib/default-config";
+import {lastDate, lastDateRange, lastQuarter} from "./lib/default-config";
 import tools from "./lib/tools";
 import Year from "./year";
 import Month from "./month";
@@ -61,7 +61,8 @@ export default {
         default: tools.getYear()
     },
     quarter: {
-        type: Number
+        type: Number,
+        default: lastQuarter(),
     },
     month: {
         type: Number,
@@ -123,7 +124,6 @@ export default {
           onClose,
           year,
           week,
-          ...lastWeek(),
           onChange: function(data){ onSus(changecall.handleWeekChange(data)) }
         }
       }
@@ -136,7 +136,6 @@ export default {
           year,
           month,
           onClose,
-          ...lastYearMonth(),
           onChange: function(month, year){ onSus(changecall.handleMonthChange(month, year)) }
         }
       }
@@ -149,7 +148,6 @@ export default {
           year,
           quarter,
           onClose,
-          ...lastQuarter(),
           enableRange: true,
           lunar: true,
           onChange: function(quarter, year){ onSus(changecall.handleQuarterChange(quarter, year)) }
