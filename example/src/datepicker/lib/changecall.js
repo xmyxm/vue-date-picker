@@ -13,6 +13,7 @@ const holidayQuery = [
 
 const handleDateChange = (value) => {
   const item = {
+    value,
     name: '按日',
     key: 'day',
     navName: tools.dateFormat('m-d', value),
@@ -26,6 +27,8 @@ const handleWeekChange = (value) => {
   const monday = tools.dateFormat('Y-m-d', new Date(value.monday));
   const sunday = tools.dateFormat('Y-m-d', new Date(value.sunday));
   const item = {
+    year,
+    week: value.week,
     name: '按周',
     key: 'week',
     navName: `W${value.week}`,
@@ -37,6 +40,8 @@ const handleWeekChange = (value) => {
 const handleMonthChange = (month, year) => {
   const newMonth = month < 10 ? `0${month}` : month;
   const item = {
+    year,
+    month,
     name: '按月',
     key: 'month',
     navName: `${year}-${newMonth}`,
@@ -51,16 +56,21 @@ const handleRangeChange = (dateGroup) => {
     return false;
   }
   const item = {
+    year: dateGroup.endDate.getFullYear(),
     name: '自定义时间段',
     key: 'optional',
     navName: `${tools.dateFormat('m-d', dateGroup.startDate)}~${tools.dateFormat('m-d', dateGroup.endDate)}`,
     fetchDate: `${tools.dateFormat('Y-m-d', dateGroup.startDate)}~${tools.dateFormat('Y-m-d', dateGroup.endDate)}`,
+    startDate: dateGroup.startDate,
+    endDate: dateGroup.endDate,
   };
   return item;
 };
 
 const handleQuarterChange = (quarter, year) => {
   const item = {
+    year,
+    quarter,
     name: '按季',
     key: 'quarter',
     navName: `第${quarter}季度`,
@@ -69,12 +79,13 @@ const handleQuarterChange = (quarter, year) => {
   return item;
 };
 
-const handleYearChange = (y) => {
+const handleYearChange = (year) => {
   const item = {
+    year,
     name: '按年',
     key: 'year',
-    navName: `按年 ${y}年`,
-    fetchDate: y,
+    navName: `按年 ${year}年`,
+    fetchDate: year,
   };
   return item;
 };
@@ -83,6 +94,7 @@ const handleFestivalChange = (param, year) => {
   let data = [];
   data = holidayQuery.filter((item, i) => item.name.indexOf(param.name) !== -1);
   const item = {
+    year,
     name: '按节日',
     key: 'festival',
     navName: `${param.name}`,

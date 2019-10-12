@@ -28,7 +28,6 @@ export default {
   },
   methods: {
     close: function(event) {
-      debugger
       if (event.target && event.target.className == "mask") {
         this.onCancel()
       }

@@ -24,6 +24,30 @@ const getWeek = function getWeek(day, month, year) {
 };
 
 /**
+ * 获取指定的Date实例是当年的年份
+ * @param  {Date} date 要处理的Date实例
+ * @return {Number}      当前是哪一年
+ */
+const getDateYearNum = function getDateWeekNum(date) {
+  if (!date || !(date instanceof Date)) {
+    date = new Date();
+  }
+  return date.getFullYear();
+};
+
+/**
+ * 获取指定的Date实例是当年的多少月
+ * @param  {Date} date 要处理的Date实例
+ * @return {Number}      第几月
+ */
+const getDateMonthNum = function getDateWeekNum(date) {
+  if (!date || !(date instanceof Date)) {
+    date = new Date();
+  }
+  return date.getMonth() + 1;
+};
+
+/**
  * 获取指定的Date实例是当年的多少周
  * @param  {Date} date 要处理的Date实例
  * @return {Number}      第几周
@@ -433,6 +457,8 @@ const getYear = function () {
 const tools = {
   getYear,
   isLeapYear,
+  getDateYearNum,
+  getDateMonthNum,
   getMonthDaysNum,
   getWeek,
   getDateWeekNum,

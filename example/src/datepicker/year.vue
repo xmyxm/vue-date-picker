@@ -86,7 +86,8 @@ export default {
   },
   props: {
     year: {
-      type: Number
+      type: Number,
+      default: tools.getYear()
     },
     lang: {
       type: String,
@@ -129,7 +130,7 @@ export default {
         // 固定值，当前年份
         currentYear: tools.getYear(),
         // 选择年份
-        selectYear: tools.getYear(),
+        selectYear: this.year,
         status: "year"
     }
   },
@@ -157,7 +158,7 @@ export default {
     this.yearRange = parseYearRange(this.selectYear || this.currentYear);
   },
   watch: {
-    year(newYear, oldYear) {
+    year(newYear) {
       this.selectYear = newYear;
       this.yearRange = parseYearRange(this.selectYear || this.currentYear);
     }

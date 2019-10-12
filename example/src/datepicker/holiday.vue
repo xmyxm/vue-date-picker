@@ -62,6 +62,10 @@ export default {
     'common-handle': CommonHandle
   },
   props: {
+    title: {
+        type: String,
+        default: '春节'
+    },
     disabled: {
         type: [Function, Boolean],
         default: false
@@ -116,7 +120,7 @@ export default {
       }
   },
   watch: {
-      title(newTitle, oldTitle) {
+      title(newTitle) {
           this.titleNext = newTitle
       },
       year(newYear) {

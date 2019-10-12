@@ -65,11 +65,11 @@ export default {
         },
         year: {
             type: Number,
-            default: (new Date()).getFullYear()
+            default: tools.getDateYearNum()
         },
         month: {
             type: Number,
-            default: (new Date()).getMonth()
+            default: tools.getDateMonthNum()
         },
         onChange: {
             type: Function,
@@ -95,15 +95,16 @@ export default {
             let list = [];
             let disabledCheck = tools.disabledCheckCreator(this.disabled);
             for (let i = 0; i < 12; i++) {
-                let disabled = disabledCheck(new Date(`${this.showYear}-${(i + 1) > 9 ? (i + 1) : '0' + (i + 1)}`));
+                let month = i + 1
+                let disabled = disabledCheck(new Date(`${this.showYear}-${month > 9 ? month : '0' + month}`));
                 let className = "normalCell"
-                if (i === this.selectMonth && this.selectYear === this.showYear) {
+                if (month === this.selectMonth && this.selectYear === this.showYear) {
                     className = "normalActiveCell"
                 } else if (disabled) {
                     className = "normalDisabledCell";
                 }
                 let data = {
-                    month: i,
+                    month,
                     disabled,
                     tapClassName: className,
                     content: langMap[i]
@@ -119,6 +120,7 @@ export default {
             this.selectYear = newYear
         },
         month(newMonth) {
+            debugger
             this.selectMonth = newMonth
         }
     },
@@ -143,7 +145,7 @@ export default {
             this.onClose();
         },
         onSure: function() {
-            this.onChange(this.selectMonth + 1, this.selectYear);
+            this.onChange(this.selectMonth, this.selectYear);
         }
     }
 };

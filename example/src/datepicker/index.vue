@@ -51,6 +51,34 @@ export default {
     "el-mask": Mask,
   },
   props: {
+    // 选择日期需要传递此参数
+    value: {
+      type: Date,
+      default: lastDate()
+    },
+    year: {
+        type: Number,
+        default: tools.getYear()
+    },
+    quarter: {
+        type: Number
+    },
+    month: {
+        type: Number,
+        default: tools.getDateMonthNum()
+    },
+    week: {
+        type: Number,
+        default: tools.getDateWeekNum(new Date())
+    },
+    title: {
+        type: String,
+        default: '春节'
+    },
+    dateRange: {
+      type: Object,
+      default: function(){ return lastDateRange() }
+    },
     top: {
       type: Number,
       default: 0
@@ -78,11 +106,11 @@ export default {
     dayConfig: {
       type: Object,
       default: function(){
-        let { onSus , onClose } = this
+        let { onSus , onClose, value } = this
         return {
           onClose,
           lunar : true,
-          value: lastDate(),
+          value,
           onChange: function(data){ onSus(changecall.handleDateChange(data)) }
         }
       }
@@ -90,9 +118,11 @@ export default {
     weekConfig: {
       type: Object,
       default: function() {
-       let { onSus , onClose } = this
+       let { onSus , onClose, year, week } = this
         return {
           onClose,
+          year,
+          week,
           ...lastWeek(),
           onChange: function(data){ onSus(changecall.handleWeekChange(data)) }
         }
@@ -101,8 +131,10 @@ export default {
     monthConfig: {
       type: Object,
       default: function() {
-        let { onSus , onClose } = this
+        let { onSus , onClose, month, year } = this
         return {
+          year,
+          month,
           onClose,
           ...lastYearMonth(),
           onChange: function(month, year){ onSus(changecall.handleMonthChange(month, year)) }
@@ -112,8 +144,10 @@ export default {
     quarterConfig: {
       type: Object,
       default: function(){
-        let { onSus , onClose } = this
+        let { onSus , onClose, quarter, year } = this
         return {
+          year,
+          quarter,
           onClose,
           ...lastQuarter(),
           enableRange: true,
@@ -125,12 +159,12 @@ export default {
     yearConfig: {
       type: Object,
       default: function(){
-        let { onSus , onClose } = this
+        let { onSus , onClose, year } = this
         return {
+          year,
           onClose,
           enableRange: true,
           lunar: true,
-          year: tools.getYear(),
           onChange: function(data){ onSus(changecall.handleYearChange(data)) }
         }
       }
@@ -138,13 +172,13 @@ export default {
     festivalConfig: {
       type: Object,
       default: function(){
-        let { onSus , onClose } = this
+        let { onSus , onClose, title, year } = this
         return {
+          title, 
+          year,
           onClose,
           enableRange: true,
           lunar: true,
-          year: tools.getYear(),
-          title: '',
           onChange: function(data, year){ onSus(changecall.handleFestivalChange(data, year)) }
         }
       }
@@ -152,12 +186,12 @@ export default {
     optionalConfig: {
       type: Object,
       default: function(){
-        let { onSus , onClose } = this
+        let { onSus , onClose, dateRange } = this
         return {
+          value: dateRange,
           onClose,
           enableRange: true,
           lunar: true,
-          value: lastDateRange(),
           onChange: function(data){ onSus(changecall.handleRangeChange(data)) }
         }
       }
@@ -188,6 +222,33 @@ export default {
     },
     top(newTop) {
       this.topNext = newTop
+    },
+    year: function(newYear) {
+      this.yearConfig.year = newYear
+      this.weekConfig.year = newYear
+      this.quarterConfig.year = newYear
+      this.monthConfig.year = newYear
+      this.weekConfig.year = newYear
+      this.dayConfig.year = newYear
+      this.festivalConfig.year = newYear
+    },
+    quarter: function(newQuarter) {
+      this.quarterConfig.quarter = newQuarter
+    },
+    month: function(newMonth) {
+      this.monthConfig.month = newMonth
+    },
+    week: function(newWeek) {
+      this.weekConfig.week = newWeek
+    },
+    value:function(newValue) {
+      this.dayConfig.value = newValue
+    },
+    dateRange: function(newRange) {
+      this.optionalConfig.value = newRange
+    },
+    title: function(newtitle) {
+      this.festivalConfig.title = newtitle
     }
   },
   computed: {
