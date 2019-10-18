@@ -141,9 +141,7 @@ export default {
     let activeItem = this.$refs.list.querySelector('.normalActiveCell')
     let activeItemPosition = activeItem && activeItem.getBoundingClientRect();
     let parentScroll = parent.scrollTop;
-    if (activeItemPosition.y > (parentPosition.y + parentPosition.height)) {
-        parent.scrollTo(parentPosition.x, parentScroll + (activeItemPosition.y - parentPosition.y) + parentPosition.height / 2);
-    }
+    parent.scrollTo(parentPosition.x, parentScroll + parentPosition.height / 2);
   },
   methods: {
     gerWeekList: function(startDate, endDate, disabledCheck) {

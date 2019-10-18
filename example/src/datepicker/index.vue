@@ -303,6 +303,10 @@ export default {
             yesterday = tools.resetToFirst(yesterday, 'week');
             yesterday = naturalCalc('+7day', yesterday);
         }
+        if (this.buttonKeyNext === 'month') {
+            let now = new Date();
+            yesterday = now.setMonth(now.getMonth() - 1);
+        }
         date = naturalCalc('-0day', date);
         // today = tools.buildNoTimesDate(yesterday);
         if (date < boundary || date > yesterday) {

@@ -31,7 +31,7 @@ export default {
         top: 0,
         year: 2019,
         quarter: 3,
-        month: 10,
+        month: 9,
         week: 32,
         title: '国庆',
         dateRange: {startDate: new Date('2019-10-1'), endDate: new Date('2019-10-5')},

@@ -435,7 +435,7 @@ const isArray = function isArray(item) {
 // 禁用的范围，false为不禁用，true为全部禁用
 // 数组时为多点禁用
 // 如：[new Date('2015/11/11'), [new Date('2015/11/01'), new Date('2015/11/04')]]表示禁用 2015/11/11 和 2015/11/01 - 2015/11/04
-const disabledCheckCreator = function disabledCheckCreator() {
+const disabledCheckCreator = function () {
   const disabledMap = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
   if (disabledMap === true) {

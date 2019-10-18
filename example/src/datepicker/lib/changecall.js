@@ -14,8 +14,10 @@ const holidayQuery = [
 const handleDateChange = (value) => {
   const item = {
     value,
+    year: value.getFullYear(),
     name: '按日',
     key: 'day',
+    day: value.getDate(),
     navName: tools.dateFormat('m-d', value),
     fetchDate: tools.dateFormat('Y-m-d', value),
   };
@@ -27,6 +29,7 @@ const handleWeekChange = (value) => {
   const monday = tools.dateFormat('Y-m-d', new Date(value.monday));
   const sunday = tools.dateFormat('Y-m-d', new Date(value.sunday));
   const item = {
+    value,
     year,
     week: value.week,
     name: '按周',
@@ -39,7 +42,11 @@ const handleWeekChange = (value) => {
 
 const handleMonthChange = (month, year) => {
   const newMonth = month < 10 ? `0${month}` : month;
+  const time = new Date();
+  time.setFullYear(year);
+  time.setMonth(month);
   const item = {
+    value: time,
     year,
     month,
     name: '按月',
