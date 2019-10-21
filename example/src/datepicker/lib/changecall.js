@@ -18,7 +18,7 @@ const handleDateChange = (value) => {
     name: '按日',
     key: 'day',
     day: value.getDate(),
-    navName: tools.dateFormat('m-d', value),
+    navName: tools.dateFormat('Y-m-d', value),
     fetchDate: tools.dateFormat('Y-m-d', value),
   };
   return item;
