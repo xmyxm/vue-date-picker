@@ -83,6 +83,7 @@
 .dayRegion .dayItemVal, 
 .dayNext .dayItemVal, 
 .dayActive .dayItemVal, 
+.todayActive .dayItemVal,
 .dayItem .dayItemVal,
 .today .dayItemVal {
     display: inline-block;
@@ -133,11 +134,11 @@
 .dayNext {
     color: #a6a6a6;
 }
-.dayActive .dayItemVal {
+.dayActive .dayItemVal, .todayActive .dayItemVal{
     color: #fff;
     background-color: #118bfb;
 }
-.dayActive .dayItemVal:hover {
+.dayActive .dayItemVal:hover, .todayActive .dayItemVal:hover {
     background-color: #118bfb;
 }
 .dayRegion .dayItemVal {

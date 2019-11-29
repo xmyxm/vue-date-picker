@@ -26,69 +26,70 @@ export default {
       title: '日历组件',
       dateText: this.getDate(),
       timeData: {
-        showKeyList: ['day', 'week', 'month', 'quarter', 'year', 'festival', 'optional'], // 
+        showKeyList: ['day', 'week', 'month', 'quarter', 'year', 'festival', 'optional'], //
         open: false,
         top: 0,
         year: 2019,
         quarter: 3,
         month: 9,
         week: 32,
+        endDate: new Date(),
         title: '国庆',
-        dateRange: {startDate: new Date('2019-10-1'), endDate: new Date('2019-10-5')},
+        dateRange: { startDate: new Date('2019-10-1'), endDate: new Date('2019-10-5') },
         value: this.getYearMonthDay(),
-        onSus: this.onSusFun
-      }
+        onSus: this.onSusFun,
+      },
     };
   },
   methods: {
-      getDate() {
-            const date = new Date();
-            const year = date.getFullYear();
-            const month = date.getMonth() + 1;
-            const day = date.getDate() - 1;
-            return `${year}-${month}-${day}`
-      },
-      getYearMonthDay() {
-        return new Date(this.getDate())
-      },
-      onOff() {
-          this.timeData.open = !this.timeData.open
-          if (this.timeData.open) {
-              const timebox = this.$refs.timebox
-              const timeboxPosition = timebox.getBoundingClientRect()
-              const height = timeboxPosition.y + timeboxPosition.height
-              this.timeData.top = height
-          }
-      },
-      onSusFun(data) {
-        this.timeData.open = false
-        this.dateText = data.fetchDate
-        if (data.year) {
-          this.timeData.year = data.year
-        }
-        switch(data.key) {
-          case 'day': 
-          this.timeData.value = data.value
-          break;
-          case 'week': 
-          this.timeData.week = data.week
-          break;
-          case 'month': 
-          this.timeData.month = data.month
-          break;
-          case 'quarter': 
-          this.timeData.quarter = data.quarter
-          break;
-          case 'festival': 
-          this.timeData.title = data.navName
-          break;
-          case 'optional': 
-          this.timeData.dateRange = { startDate: data.startDate, endDate: data.endDate }
-          break;
-        }
-        console.log(data.key, data)
+    getDate() {
+      const date = new Date();
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1;
+      const day = date.getDate() - 1;
+      return `${year}-${month}-${day}`;
+    },
+    getYearMonthDay() {
+      return new Date(this.getDate());
+    },
+    onOff() {
+      this.timeData.open = !this.timeData.open;
+      if (this.timeData.open) {
+        const timebox = this.$refs.timebox;
+        const timeboxPosition = timebox.getBoundingClientRect();
+        const height = timeboxPosition.y + timeboxPosition.height;
+        this.timeData.top = height;
       }
-  }
+    },
+    onSusFun(data) {
+      this.timeData.open = false;
+      this.dateText = data.fetchDate;
+      if (data.year) {
+        this.timeData.year = data.year;
+      }
+      switch (data.key) {
+        case 'day':
+          this.timeData.value = data.value;
+          break;
+        case 'week':
+          this.timeData.week = data.week;
+          break;
+        case 'month':
+          this.timeData.month = data.month;
+          break;
+        case 'quarter':
+          this.timeData.quarter = data.quarter;
+          break;
+        case 'festival':
+          this.timeData.title = data.navName;
+          break;
+        case 'optional':
+          this.timeData.dateRange = { startDate: data.startDate, endDate: data.endDate };
+          break;
+      }
+      console.log(data.key, data);
+    },
+  },
 };
 </script>
 
@@ -147,7 +148,7 @@ export default {
   border-right: 2px solid #fff;
   vertical-align: middle;
   margin-left: 3px;
-  transform-origin:center center; 
+  transform-origin:center center;
   transition: transform 0.5s ease;
 }
 
