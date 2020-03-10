@@ -2,7 +2,7 @@
   <div class="normal weekWrap">
         <div class="header">
                 <div class="headerInner">
-                    <div class="btn" @touchend="prevChange">
+                    <div class="btn" @click="prevChange">
                         <div class="iconBtn">
                             <Icon type="angleLeft" />
                         </div>
@@ -10,7 +10,7 @@
                     <div class="centerBtn">
                         <span class="dateSplitLine">{{selectYear}}</span>
                     </div>
-                    <div class="rightBtn" @touchend="nextChange">
+                    <div class="rightBtn" @click="nextChange">
                         <div class="iconBtn">
                             <Icon type="angleRight" />
                         </div>

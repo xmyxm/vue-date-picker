@@ -6,7 +6,7 @@
           <div
             :title="locale.lang[lang].btns[0]"
             class="btn"
-            @touchend="handleDateCalc('-1', 'year')"
+            @click="handleDateCalc('-1', 'year')"
           >
             <div class="iconBtn">
               <Icon :type="btnsNext.BTN_MINUS_YEAR" />
@@ -15,7 +15,7 @@
           <div
             :title="locale.lang[lang].btns[1]"
             class="btn"
-            @touchend="handleDateCalc('-1', 'month')"
+            @click="handleDateCalc('-1', 'month')"
           >
             <div class="iconBtn">
               <Icon :type="btnsNext.BTN_MINUS_MONTH" />
@@ -25,14 +25,14 @@
             :title="displayDateNext.getFullYear() + '-' + tools.dateFormat('m', this.displayDateNext)"
             class="centerBtn"
           >
-            <span @touchend="handleShowYearSelector">{{displayDateNext.getFullYear()}}</span>
+            <span @click="handleShowYearSelector">{{displayDateNext.getFullYear()}}</span>
             <span class="dateSplitLine">-</span>
-            <span @touchend="handleShowMonthSelector">{{tools.dateFormat('m', this.displayDateNext)}}</span>
+            <span @click="handleShowMonthSelector">{{tools.dateFormat('m', this.displayDateNext)}}</span>
           </div>
           <div
             :title="locale.lang[lang].btns[2]"
             class="rightBtn"
-            @touchend="handleDateCalc('+1', 'month')"
+            @click="handleDateCalc('+1', 'month')"
           >
             <div class="iconBtn">
               <Icon :type="btnsNext.BTN_PLUS_MONTH" />
@@ -41,7 +41,7 @@
           <div
             :title="locale.lang[lang].btns[3]"
             class="rightBtn"
-            @touchend="handleDateCalc('+1', 'year')"
+            @click="handleDateCalc('+1', 'year')"
           >
             <div class="iconBtn">
               <Icon :type="btnsNext.BTN_PLUS_YEAR" />

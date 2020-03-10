@@ -565,6 +565,7 @@
 .buttonItemWrapper1 {
     box-sizing: border-box;
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .buttonItemWrapper4 .buttonItem,

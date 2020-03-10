@@ -3,16 +3,16 @@
     <div class="header">
       <div class="headerInner">
         <div class="btn">
-          <div class="iconBtn" @touchend="handlePageRange('prev')">
+          <div class="iconBtn" @click="handlePageRange('prev')">
             <Icon type="angleLeft" />
           </div>
         </div>
-        <div class="centerBtn" @touchend="handleChooseRange">
+        <div class="centerBtn" @click="handleChooseRange">
           {{yearRange.start}}
           <span class="normalSplitLine">-</span>
           {{yearRange.end}}
         </div>
-        <div class="rightBtn" data-type="next" @touchend="handlePageRange('next')">
+        <div class="rightBtn" data-type="next" @click="handlePageRange('next')">
           <div class="iconBtn">
             <Icon type="angleRight" />
           </div>
@@ -25,14 +25,13 @@
           v-for="item in yearList"
           v-bind:key="item.index || item.start"
           :class="item.className"
-          @touchend="item.touchendHandle(item)"
+          @click="item.touchendHandle(item)"
         >{{item.start}}</div>
       </div>
     </div>
     <div class="normalFooter">
-      <div class="currentYearBtn" @touchend="handleCurrentYear">{{langMap.btns && langMap.btns[4]}}</div>
+      <div class="currentYearBtn" @click="handleCurrentYear">{{langMap.btns && langMap.btns[4]}}</div>
     </div>
-
     <common-handle v-if="delayChange" />
   </div>
 </template>
@@ -41,10 +40,10 @@
 /**
  * 年份选择器，可单独抽出使用，calendar中有集成
  */
-import tools from "./lib/tools";
-import conf from "./lib/config";
+import tools from './lib/tools';
+import conf from './lib/config';
 import Icon from './icon';
-import CommonHandle from "./commonhandle";
+import CommonHandle from './commonhandle';
 
 const BTNS = conf.headBtns;
 // 一小组年数
@@ -57,8 +56,8 @@ const GROUP_RANGE_STEP = 80;
 // 12年一组
 const parseYearRange = (year = tools.getYear()) => {
   year = parseInt(year, 10);
-  let startY = tools.beautifyNum(year, LIST_RANGE_STEP);
-  let endY = startY + LIST_YEARS;
+  const startY = tools.beautifyNum(year, LIST_RANGE_STEP);
+  const endY = startY + LIST_YEARS;
 
   return { start: startY, end: endY - 1 };
 };
@@ -66,94 +65,93 @@ const parseYearRange = (year = tools.getYear()) => {
 // 60年一组跨度
 const parseMoreRange = (year = tools.getYear()) => {
   year = parseInt(year, 10);
-  let startY = tools.beautifyNum(year, GROUP_RANGE_STEP);
-  let endY = startY + GROUP_RANGE_STEP;
-  let rangeGroup = [];
+  const startY = tools.beautifyNum(year, GROUP_RANGE_STEP);
+  const endY = startY + GROUP_RANGE_STEP;
+  const rangeGroup = [];
   for (let i = startY; i < endY; i += LIST_RANGE_STEP) {
     rangeGroup.push({
       start: i,
-      end: i + LIST_YEARS - 1
+      end: i + LIST_YEARS - 1,
     });
   }
   return { group: rangeGroup, range: { start: startY, end: endY + 1 } };
 };
 
 export default {
-  name: "Year",
+  name: 'Year',
   components: {
     Icon,
-    'common-handle': CommonHandle
+    'common-handle': CommonHandle,
   },
   props: {
     year: {
       type: Number,
-      default: tools.getYear()
+      default: tools.getYear(),
     },
     lang: {
       type: String,
-      default: "zh"
+      default: 'zh',
     },
     size: {
       type: String,
-      default: "normal"
+      default: 'normal',
     },
     delayChange: {
       type: Boolean,
-      default: true
+      default: true,
     },
     sizeLimit: {
       type: Boolean,
-      default: true
+      default: true,
     },
     onChange: {
       type: Function,
-      default: function() {}
+      default() {},
     },
     btns: {
-      type: Object
+      type: Object,
     },
     onClose: {
       type: Function,
-      default: function() {}
+      default() {},
     },
     disabled: {
       type: [Function, Boolean],
-      default: false
-    }
+      default: false,
+    },
   },
-  data: function(){
-      return {
-        locale: conf.locale,
-        yearRange: null,
-        moreYearGroup: null,
-        moreYearRange: null,
-        // 固定值，当前年份
-        currentYear: tools.getYear(),
-        // 选择年份
-        selectYear: this.year,
-        status: "year"
-    }
+  data() {
+    return {
+      locale: conf.locale,
+      yearRange: null,
+      moreYearGroup: null,
+      moreYearRange: null,
+      // 固定值，当前年份
+      currentYear: tools.getYear(),
+      // 选择年份
+      selectYear: this.year,
+      status: 'year',
+    };
   },
   computed: {
-    langMap: function() {
-      return this.locale.lang[this.lang || "zh"] || {};
+    langMap() {
+      return this.locale.lang[this.lang || 'zh'] || {};
     },
-    btnsData: function() {
-      let _btns = tools.smartyMerge(BTNS, this.btns || {});
+    btnsData() {
+      const _btns = tools.smartyMerge(BTNS, this.btns || {});
       return _btns;
     },
-    yearList: function() {
-      if (this.status === "year") {
+    yearList() {
+      if (this.status === 'year') {
         return this.renderYearList(this.yearRange);
-      } else {
-        let yearStart =
+      }
+      const yearStart =
           this.selectYear &&
           tools.beautifyNum(this.selectYear, LIST_RANGE_STEP);
-        return this.renderYearRange(this.moreYearGroup, yearStart);
-      }
-    }
+      return this.renderYearRange(this.moreYearGroup, yearStart);
+    },
   },
-  created: function() {
+  created() {
     this.selectYear = this.year;
     this.yearRange = parseYearRange(this.selectYear || this.currentYear);
   },
@@ -161,89 +159,89 @@ export default {
     year(newYear) {
       this.selectYear = newYear;
       this.yearRange = parseYearRange(this.selectYear || this.currentYear);
-    }
+    },
   },
   methods: {
     // 选中当前年
-    handleCurrentYear: function() {
+    handleCurrentYear() {
       this.selectYear = tools.getYear();
-      this.status = "year";
+      this.status = 'year';
       this.yearRange = parseYearRange(this.selectYear);
     },
 
     // 选中
-    handleChooseYear: function(data) {
+    handleChooseYear(data) {
       if (data.disabled) return;
-      let year = data.start;
+      const year = data.start;
       if (this.selectYear !== year) {
         this.selectYear = year;
       }
     },
 
     // 翻页
-    handlePageRange: function(act) {
+    handlePageRange(act) {
       // 年列表翻页
-      if (this.status === "year") {
-        let rangeParam =
+      if (this.status === 'year') {
+        const rangeParam =
           this.yearRange.start +
-          (act === "next" ? LIST_RANGE_STEP : -LIST_RANGE_STEP);
+          (act === 'next' ? LIST_RANGE_STEP : -LIST_RANGE_STEP);
         this.yearRange = parseYearRange(rangeParam);
       }
       // 年范围翻页
       else {
-        let rangeParam =
+        const rangeParam =
           this.moreYearRange.start +
-          (act === "next" ? GROUP_RANGE_STEP : -GROUP_RANGE_STEP);
-        let parsedMoreRange = parseMoreRange(rangeParam);
+          (act === 'next' ? GROUP_RANGE_STEP : -GROUP_RANGE_STEP);
+        const parsedMoreRange = parseMoreRange(rangeParam);
         this.moreYearRange = parsedMoreRange.range;
         this.moreYearGroup = parsedMoreRange.group;
       }
     },
 
     // 范围选择
-    handleChooseRange: function() {
-      if (this.status === "year") {
-        let parsedMoreRange = parseMoreRange(this.yearRange.start);
-        this.status = "range";
+    handleChooseRange() {
+      if (this.status === 'year') {
+        const parsedMoreRange = parseMoreRange(this.yearRange.start);
+        this.status = 'range';
         this.moreYearRange = parsedMoreRange.range;
         this.moreYearGroup = parsedMoreRange.group;
       } else {
-        this.status = "year";
+        this.status = 'year';
       }
     },
 
-    onCancel: function() {
+    onCancel() {
       this.onClose();
     },
-    onSure: function() {
+    onSure() {
       this.onChange(this.selectYear);
     },
     // 选中大的年范围
-    handleChoosedLargeRange: function(rangeStartYear) {
-      this.status = "year";
+    handleChoosedLargeRange(rangeStartYear) {
+      this.status = 'year';
       this.yearRange = parseYearRange(rangeStartYear);
     },
 
     // 年份列表
     renderYearList(range) {
       let { start, end } = range;
-      let list = [];
-      let disabledCheck = tools.disabledCheckCreator(this.disabled);
+      const list = [];
+      const disabledCheck = tools.disabledCheckCreator(this.disabled);
       for (; start <= end; start++) {
-        let className = "normalCell";
-        let disabled = disabledCheck(start);
+        let className = 'normalCell';
+        const disabled = disabledCheck(start);
         if (this.selectYear === start) {
-          className = "normalActiveCell";
+          className = 'normalActiveCell';
         }
         if (disabled) {
-          className = "normalDisabledCell";
+          className = 'normalDisabledCell';
         }
-        let data = {
+        const data = {
           start,
           className,
-          disabled
-        }
-        data.touchendHandle = this.handleChooseYear.bind(this, data)
+          disabled,
+        };
+        data.touchendHandle = this.handleChooseYear.bind(this, data);
         list.push(data);
       }
       return list;
@@ -251,17 +249,17 @@ export default {
 
     // 年份范围
     renderYearRange(rangeGroup, currentRangeStart) {
-      let list = rangeGroup.map((range, index) => {
-        let data = {
+      const list = rangeGroup.map((range, index) => {
+        const data = {
           index,
-          start: range.start + " - " + range.end,
-          className:  range.start === currentRangeStart  ? "twoRowActiveCell"  : "twoRowCell"
-        }
+          start: `${range.start} - ${range.end}`,
+          className: range.start === currentRangeStart ? 'twoRowActiveCell' : 'twoRowCell',
+        };
         data.touchendHandle = this.handleChoosedLargeRange.bind(this, range.start);
-        return data
+        return data;
       });
       return list;
-    }
-  }
+    },
+  },
 };
 </script>
