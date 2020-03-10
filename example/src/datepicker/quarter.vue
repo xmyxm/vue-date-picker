@@ -20,7 +20,7 @@
             </div>
         </div>
         <!-- 季度列表 -->
-        <Swipe className="normalList">
+        <div className="normalList">
             <div class="holidaynormalListInner">
                 <Tap :key="item.index" v-for="item in quartList" :init-data="item" class="item.tapClassName">
                     <div key={i} class="itemWrap">
@@ -33,7 +33,7 @@
                     </div>
                 </Tap>
             </div>
-        </Swipe>
+        </div>
 
         <common-handle v-if="delayChange"/>
     </div>
@@ -41,7 +41,7 @@
 
 <script>
 
-import Swipe from './swipe';
+// import Swipe from './swipe';
 import Tap from './tap';
 import CommonHandle from './commonhandle';
 import Icon from './icon';
@@ -51,7 +51,7 @@ export default {
   name: 'Quarter',
   components: {
     'common-handle': CommonHandle,
-    Swipe,
+    //  Swipe,
     Icon,
     Tap,
   },

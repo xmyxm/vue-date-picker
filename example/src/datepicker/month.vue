@@ -18,13 +18,13 @@
         </div>
 
         <!-- 月份列表 -->
-        <Swipe class-name="normalList" >
+        <div class-name="normalList" >
             <div class="normalListInner">
                 <Tap v-for="item in monthList" :key="item.month" :init-data="item">
                     {{item.content}}
                 </Tap>
             </div>
-        </Swipe>
+        </div>
 
         <common-handle v-if="delayChange" />
     </div>
@@ -34,7 +34,7 @@
 import Icon from './icon';
 import tools from './lib/tools';
 import conf from './lib/config';
-import Swipe from './swipe';
+// import Swipe from './swipe';
 import Tap from './tap';
 import CommonHandle from './commonhandle';
 
@@ -42,7 +42,7 @@ export default {
   name: 'Month',
   components: {
     'common-handle': CommonHandle,
-    Swipe,
+    // Swipe,
     Icon,
     Tap,
   },

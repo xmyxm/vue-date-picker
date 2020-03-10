@@ -18,7 +18,7 @@
                 </div>
             </div>
 
-        <Swipe className="normalList">
+        <div className="normalList">
             <div class="weeknormalListInner" ref="list">
                 <Tap v-for="item in weekList" :init-data="item" :key="item.index">
                     <div>
@@ -29,7 +29,7 @@
                     </div>
                 </Tap>
             </div>
-        </Swipe>
+        </div>
 
         <common-handle v-if="delayChange"/>
     </div>
@@ -38,7 +38,7 @@
 <script>
 import Icon from './icon';
 import tools from './lib/tools';
-import Swipe from './swipe';
+// import Swipe from './swipe';
 import Tap from './tap';
 import CommonHandle from './commonhandle';
 
@@ -46,7 +46,7 @@ export default {
   name: 'Week',
   components: {
     'common-handle': CommonHandle,
-    Swipe,
+    //  Swipe,
     Icon,
     Tap,
   },

@@ -61,7 +61,7 @@
       </div>
 
       <!-- 日期单元 -->
-      <Swipe class-name="dayList" data-role-class="calendar-dayList">
+      <div class="dayList">
         <Tap
           v-for="dayData in dayListData"
           :class="dayData.status"
@@ -73,7 +73,7 @@
           <p v-if="dayData.holiday" class="holidayWrap">假</p>
           <p v-if="dayData.work" class="workWrap">班</p>
         </Tap>
-      </Swipe>
+      </div>
 
       <!-- 渲染日历脚(clock相关) -->
       <div v-if="enableClock" class="footer" data-role-class="calendar-footer">
@@ -96,7 +96,7 @@ import tools from './lib/tools';
 import conf from './lib/config';
 import Clock from './clock';
 import Icon from './icon';
-import Swipe from './swipe';
+// import Swipe from './swipe';
 import Tap from './tap';
 import CommonHandle from './commonhandle';
 
@@ -104,7 +104,7 @@ export default {
   name: 'Calendar',
   components: {
     Clock,
-    Swipe,
+    // Swipe,
     Icon,
     Tap,
     'common-handle': CommonHandle,

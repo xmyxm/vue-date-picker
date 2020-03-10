@@ -9,30 +9,30 @@
 <script>
 
 export default {
-  name: "elMask",
+  name: 'elMask',
   components: {},
   props: {
     top: {
       type: Number,
-      default: 0
+      default: 0,
     },
     onCancel: {
       type: Function,
-      default: function() {}
-    }
+      default() {},
+    },
   },
   computed: {
-     topHeight: function() {
-       return this.top
-     }
+    topHeight() {
+      return this.top;
+    },
   },
   methods: {
-    close: function(event) {
-      if (event.target && event.target.className == "mask") {
-        this.onCancel()
+    close(event) {
+      if (event.target && event.target.className == 'mask') {
+        this.onCancel();
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

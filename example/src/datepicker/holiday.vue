@@ -19,7 +19,7 @@
             </div>
         </div>
 
-        <Swipe class="normalList">
+        <div class="normalList">
             <div class="holidaynormalListInner">
                 <Tap v-for="item in holidayList" :key="item.name"
                     :init-data="item"
@@ -34,7 +34,7 @@
                     </div>
                 </Tap>
             </div>
-        </Swipe>
+        </div>
 
         <common-handle v-if="delayChange" />
     </div>
@@ -42,7 +42,7 @@
 
 <script>
 import Icon from './icon';
-import Swipe from './swipe';
+// import Swipe from './swipe';
 import Tap from './tap';
 import CommonHandle from './commonhandle';
 import lunarUtil from './lib/lunar-util';
@@ -56,7 +56,7 @@ export default {
   name: 'Holiday',
   components: {
     Icon,
-    Swipe,
+    //    Swipe,
     Tap,
     'common-handle': CommonHandle,
   },
