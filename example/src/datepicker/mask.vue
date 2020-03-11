@@ -43,16 +43,25 @@ export default {
     top: 0;
     width: 100%;
     height: 100%;
-    /* background-color: rgba(153, 153, 153, 0.8); */
     z-index: 10;
     overflow: hidden;
+    background-color: rgba(153, 153, 153, 0.8);
 }
 .mask .maskInner {
     position: relative;
     background: #fff;
-    max-width: 420px;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 1px solid #e4e7ed;
 }
+/* @media screen and (max-width: 419px) {
+    .mask {
+        background-color: rgba(153, 153, 153, 0.8);
+    }
+}
+@media screen and (min-width: 420px) {
+    .mask .maskInner {
+      width: 420px;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 1px solid #e4e7ed;
+    }
+} */
 </style>

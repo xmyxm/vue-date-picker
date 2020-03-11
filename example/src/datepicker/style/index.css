@@ -457,6 +457,7 @@
     background: #fff;
     position: relative;
     z-index: 15;
+    font-size: 15px;
 }
 
 /**按周选择**/
