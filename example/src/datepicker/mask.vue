@@ -43,12 +43,16 @@ export default {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(153, 153, 153, 0.8);
+    /* background-color: rgba(153, 153, 153, 0.8); */
     z-index: 10;
     overflow: hidden;
 }
 .mask .maskInner {
     position: relative;
     background: #fff;
+    max-width: 420px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid #e4e7ed;
 }
 </style>

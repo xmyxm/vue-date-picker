@@ -6,9 +6,7 @@
 .yearWrapperMedium,
 .monthWrapperMedium,
 .weekWrapperMedium,
-.clockWrapperMedium,
-.weekWrapper,
-.clockWrapper
+.weekWrapper
  {
     position: relative;
     background-color: #fff;
@@ -25,9 +23,7 @@
 .monthWrapper,
 .monthWrapperMedium,
 .weekWrapper,
-.weekWrapperMedium,
-.clockWrapper,
-.clockWrapperMedium {
+.weekWrapperMedium {
     border: 1px solid #ddd;
     border-radius: 2px;
 }
@@ -87,9 +83,9 @@
 .dayItem .dayItemVal,
 .today .dayItemVal {
     display: inline-block;
-    width: 2em;
-    height: 2em;
-    line-height: 2em;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
     vertical-align: middle;
     text-align: center;
     border-radius: 50%;
@@ -179,9 +175,7 @@
     display: inline-block;
     text-align: left;
     cursor: pointer;
-    margin-right: .66rem;
     vertical-align: middle;
-    font-size: .3rem;
 }
 
 .btn:last-child {
@@ -234,7 +228,7 @@
     margin-bottom: 10px;
     padding: 5px 0;
     text-align: center;
-    line-height: 1em;
+    line-height: 13px;
     cursor: pointer;
 }
 .normalActiveCell {
@@ -275,15 +269,6 @@
 .normalHeader {
     color: #000;
 }
-.normalHeader .normalHeaderInner {
-    height: 2.8em;
-    line-height: 2.8em;
-    vertical-align: middle;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
-    background-color: #fbfbfb;
-    color: #333;
-}
 .normalHeader .normalLeftBtn {
     display: inline-block;
     text-align: right;
@@ -318,57 +303,6 @@
     background-color: #f8f8f8;
 }
 
-.clockWrapper {
-    position: relative;
-}
-.groupCell {
-    display: inline-block;
-    width: 33.3%;
-    padding: 3px;
-    text-align: center;
-    border-radius: 3px;
-}
-.groupCellSplit {
-    display: inline-block;
-    width: 33.3%;
-}
-.groupCellSplit:after {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: -0.13755158em;
-    margin-top: -1em;
-    content: ':';
-    text-align: center;
-    font-size: 2em;
-    line-height: 2em;
-    font-family: sans-serif;
-}
-.clockInput {
-    padding: 3px;
-    width: 2em;
-    height: 1.6em;
-    text-align: center;
-    font-size: 1.5em;
-    border: none;
-}
-.clockWrapperMedium .clockInput {
-    width: 2.5em;
-    height: 2.5em;
-}
-.footer {
-    text-align: center;
-}
-.footer .unitWrapper {
-    width: 100%;
-    border: none;
-}
-.footer .unitWrapper .normalList {
-    width: 60%;
-    min-width: 6em;
-    padding: 4px 0;
-    margin: 0 auto;
-}
 .vicationWrap {
     width: 110%;
     transform: scale(0.7);
@@ -416,12 +350,10 @@
 }
 .handleBtn {
     font-size: 20px;
-    top: 0.02rem;
     position: relative;
 }
 .rightHandleBtn {
     font-size: 20px;
-    top: 0.02rem;
     position: relative;
 }
 .monthHandleBtn {
@@ -431,7 +363,6 @@
     float: right;
 }
 .weeknormalListInner {
-    height: 6rem;
     overflow: scroll;
 }
 .weekdateRande {
@@ -455,7 +386,7 @@
 }
 .commonHandle {
     text-align: center;
-    padding: 15px 0 10px;
+    padding: 15px 0 15px;
 }
 .commonHandleokBtn {
     width: 105px;
@@ -527,8 +458,6 @@
     position: relative;
     z-index: 15;
 }
-
-
 
 /**按周选择**/
 .selectButtons {

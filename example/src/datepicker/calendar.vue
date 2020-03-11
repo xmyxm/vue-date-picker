@@ -75,16 +75,6 @@
         </Tap>
       </div>
 
-      <!-- 渲染日历脚(clock相关) -->
-      <div v-if="enableClock" class="footer" data-role-class="calendar-footer">
-        <Clock
-          v-bind="maskSpec"
-          :time="startDate"
-          disable-clock="handleDisableClockFun"
-          on-change="handleClockChangedFun"
-        />
-      </div>
-
       <common-handle v-if="delayChange" />
     </div>
 </template>
@@ -94,7 +84,6 @@ import absoluteCalc from './lib/absolute-calc';
 import { dayConverters, cloneClockToDate } from './lib/day-converters';
 import tools from './lib/tools';
 import conf from './lib/config';
-import Clock from './clock';
 import Icon from './icon';
 // import Swipe from './swipe';
 import Tap from './tap';
@@ -103,7 +92,6 @@ import CommonHandle from './commonhandle';
 export default {
   name: 'Calendar',
   components: {
-    Clock,
     // Swipe,
     Icon,
     Tap,
@@ -131,11 +119,6 @@ export default {
     },
     // 范围模式
     enableRange: {
-      type: Boolean,
-      default: false,
-    },
-    // 启用时钟
-    enableClock: {
       type: Boolean,
       default: false,
     },
@@ -236,12 +219,6 @@ export default {
       handleChoosedMaskFun(spec) {
         this.handleChoosedMask(spec);
       },
-      handleClockChangedFun(clockObj) {
-        this.handleClockChanged(clockObj);
-      },
-      handleDisableClockFun(hour, minute) {
-        this.handleDisableClock(hour, minute);
-      },
       handleCancelMaskFun() {
         this.handleCancelMask();
       },
@@ -277,14 +254,6 @@ export default {
     },
     disabledCheckNext() {
       return tools.disabledCheckCreator(this.disabledNext);
-    },
-    maskSpec() {
-      return {
-        lang: this.lang,
-        size: this.size,
-        sizeLimit: this.sizeLimit,
-        btns: this.btnsNext,
-      };
     },
     dayListData() {
       const { displayDateNext, enableRange, startDate, endDate, disabled, validCache, cache, enablefix, lunar } = this;
