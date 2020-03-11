@@ -38,7 +38,6 @@
 <script>
 import Icon from './icon';
 import tools from './lib/tools';
-// import Swipe from './swipe';
 import Tap from './tap';
 import CommonHandle from './commonhandle';
 
@@ -46,7 +45,6 @@ export default {
   name: 'Week',
   components: {
     'common-handle': CommonHandle,
-    //  Swipe,
     Icon,
     Tap,
   },

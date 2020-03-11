@@ -34,7 +34,6 @@
 import Icon from './icon';
 import tools from './lib/tools';
 import conf from './lib/config';
-// import Swipe from './swipe';
 import Tap from './tap';
 import CommonHandle from './commonhandle';
 
@@ -42,7 +41,6 @@ export default {
   name: 'Month',
   components: {
     'common-handle': CommonHandle,
-    // Swipe,
     Icon,
     Tap,
   },

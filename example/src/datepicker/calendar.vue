@@ -85,14 +85,12 @@ import { dayConverters, cloneClockToDate } from './lib/day-converters';
 import tools from './lib/tools';
 import conf from './lib/config';
 import Icon from './icon';
-// import Swipe from './swipe';
 import Tap from './tap';
 import CommonHandle from './commonhandle';
 
 export default {
   name: 'Calendar',
   components: {
-    // Swipe,
     Icon,
     Tap,
     'common-handle': CommonHandle,

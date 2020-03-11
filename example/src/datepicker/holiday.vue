@@ -42,7 +42,6 @@
 
 <script>
 import Icon from './icon';
-// import Swipe from './swipe';
 import Tap from './tap';
 import CommonHandle from './commonhandle';
 import lunarUtil from './lib/lunar-util';
@@ -56,7 +55,6 @@ export default {
   name: 'Holiday',
   components: {
     Icon,
-    //    Swipe,
     Tap,
     'common-handle': CommonHandle,
   },

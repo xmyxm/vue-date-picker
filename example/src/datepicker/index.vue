@@ -31,7 +31,6 @@ import Year from './year';
 import Month from './month';
 import Week from './week';
 import Mask from './mask';
-import Swipe from './swipe';
 import Tap from './tap';
 import Quarter from './quarter';
 import Holiday from './holiday';
@@ -43,7 +42,6 @@ export default {
     Year,
     Month,
     Week,
-    Swipe,
     Tap,
     Quarter,
     Calendar,
